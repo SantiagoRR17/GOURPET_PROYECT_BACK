@@ -1,0 +1,29 @@
+{
+  "name": "gourpet_proyect_back",
+  "version": "1.0.0",
+  "description": "Repositorio de Gourpet para el backend",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "nodemon index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/SantiagoRR17/GOURPET_PROYECT_BACK.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/SantiagoRR17/GOURPET_PROYECT_BACK/issues"
+  },
+  "homepage": "https://github.com/SantiagoRR17/GOURPET_PROYECT_BACK#readme",
+  "dependencies": {
+    "dotenv": "^17.2.3",
+    "express": "^5.1.0",
+    "mongoose": "^8.19.2"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.10"
+  }
+}
