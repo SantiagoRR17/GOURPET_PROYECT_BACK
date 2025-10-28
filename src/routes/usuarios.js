@@ -28,12 +28,13 @@ router.get("/usuarios/:id", (req, res) => {
 });
 
 //Consultar cantidad de usuarios registrados
+/*
 router.get("/usuarios/count", (req, res) => {
  usuarioSchema.countDocuments()
  .then((count) => res.json({ count }))
  .catch((error) => res.json({ message: error }));
 });
-
+*/
 
 
 
