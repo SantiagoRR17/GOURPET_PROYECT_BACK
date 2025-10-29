@@ -36,6 +36,21 @@ router.get("/usuarios/count", (req, res) => {
 });
 */
 
+// Eliminar usuario por su id
+router.delete("/usuarios/:id", (req, res) => {
+  const { id } = req.params;
 
+  usuarioSchema
+    .findByIdAndDelete(id) // Busca el usuario por ID y lo elimina
+    .then((data) => {
+      if (!data) {
+        return res.status(404).json({ message: "Usuario no encontrado" });
+      }
+      res.json({ message: "Usuario eliminado correctamente", data });
+    })
+    .catch((error) => {
+      res.status(500).json({ message: error });
+    });
+});
 
 module.exports = router;
