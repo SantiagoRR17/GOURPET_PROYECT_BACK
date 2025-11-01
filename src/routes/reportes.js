@@ -18,3 +18,5 @@ router.get("/reportes", (req, res) => {
   .then((count) => res.json({ count }))
   .catch((error) => res.json({ message: error }));
 });
+
+module.exports = router;

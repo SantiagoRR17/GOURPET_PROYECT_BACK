@@ -1,28 +1,31 @@
 const parser = require("body-parser");
 const express = require("express");
 const app = express();
-const port = process.env.PORT || 3000;
+const port = 3000;
 const mongoose = require("mongoose");
 const cors = require("cors");
+const userRoutes = require("./routes/usuarios");
+const recetaRoutes = require("./routes/recetas");
+const calificacionRoutes = require("./routes/calificaciones");
+const favoritoRoutes = require("./routes/favoritos");
+const reporteRoutes = require("./routes/reportes");
 require("dotenv").config(); 
 app.use(cors()); 
 app.use(express.json());
 app.use(parser.urlencoded({ extended: false })); 
 
 
-app.use("/api/usuarios", require("./routes/usuarios"));
-app.use("/api/recetas", require("./routes/recetas"));
-app.use("/api/calificaciones", require("./routes/calificaciones"));
-app.use("/api/favoritos", require("./routes/favoritos"));
-app.use("/api/reportes", require("./routes/reportes"));
+app.use("/api/usuarios", userRoutes);
+app.use("/api/recetas", recetaRoutes);
+app.use("/api/calificaciones", calificacionRoutes);
+app.use("/api/favoritos", favoritoRoutes);
+app.use("/api/reportes", reporteRoutes);
 
 
-mongoose.connect(process.env.MONGODB_URI || "mongodb://127.0.0.1:27017/gourpet_db", {
-  useNewUrlParser: true,
-  useUnifiedTopology: true,
-})
-  .then(() => console.log(" Conectado a MongoDB"))
-  .catch((err) => console.error( err));
+mongoose
+ .connect(process.env.MONGODB_URI)
+ .then(() => console.log("Conexión exitosa"))
+ .catch((error) => console.log(error));
 
 app.get("/", (req, res) => {
   res.send(" Bienvenido a la API de Gourpet");
