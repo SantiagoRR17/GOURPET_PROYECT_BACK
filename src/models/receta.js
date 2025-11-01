@@ -24,11 +24,6 @@ const recetaSchema = new mongoose.Schema({
     enum: ["perro", "gato"],
     required: false
   },
-  categoria: {
-    type: String,
-    enum: ["Convencional", "Cruda", "Vegana"],
-    default: "Convencional"
-  },
   calificacion_promedio: {
     type: Number,
     default: 0

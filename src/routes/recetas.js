@@ -11,7 +11,7 @@ router.post("/receta", async (req, res) => {
     } 
     //Crear una nueva receta 
     const nuevaReceta = new Receta({ 
-      nombre, descripcion, ingredientes, tipo_dieta, especie, categoria, creada_por, 
+      nombre, descripcion, ingredientes, tipo_dieta, especie, creada_por, 
     }); 
     //Guardar la receta en la base de datos 
     await nuevaReceta.save(); 
@@ -60,7 +60,7 @@ router.get("/recetas/:id", (req, res) => {
 //Consultar un receta por atributo
 router.get("/recetas/buscar", (req, res) => {
  const { campo, valor } = req.query;
- const camposValidos = ['nombre', 'descripcion', 'ingredientes','tipo_dieta', 'especie', 'categoria'];
+ const camposValidos = ['nombre', 'descripcion', 'ingredientes','tipo_dieta', 'especie'];
  if (!camposValidos.includes(campo)) {
    return res.status(400).json({ message: "Campo de búsqueda no válido" });
  }
@@ -87,7 +87,7 @@ router.put("/recetas/:id/modificar", (req, res) => {
 router.put("/recetas/:id", async (req, res) => {
   try {
     const { id } = req.params;
-    const camposPermitidos = ["nombre","descripcion","ingredientes","tipo_dieta","especie","categoria","publicada"];
+    const camposPermitidos = ["nombre","descripcion","ingredientes","tipo_dieta","especie","publicada"];
     const set = {};
     for (const campo of camposPermitidos) {
       if (Object.prototype.hasOwnProperty.call(req.body, campo)) {
