@@ -17,6 +17,13 @@ router.get("/usuarios", (req, res) => {
  .then((data) => res.json(data))
  .catch((error) => res.json({ message: error }));
 });
+//Consultar cantidad de usuarios registrados
+
+router.get("/usuarios/count", (req, res) => {
+ usuarioSchema.countDocuments()
+ .then((count) => res.json({ count }))
+ .catch((error) => res.json({ message: error }));
+});
 
 //Consultar un usuario por su id
 router.get("/usuarios/:id", (req, res) => {
@@ -27,14 +34,7 @@ router.get("/usuarios/:id", (req, res) => {
  .catch((error) => res.json({ message: error }));
 });
 
-//Consultar cantidad de usuarios registrados
-/*
-router.get("/usuarios/count", (req, res) => {
- usuarioSchema.countDocuments()
- .then((count) => res.json({ count }))
- .catch((error) => res.json({ message: error }));
-});
-*/
+
 
 // Eliminar usuario por su id
 router.delete("/usuarios/:id", (req, res) => {

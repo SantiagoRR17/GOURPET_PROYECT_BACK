@@ -15,11 +15,11 @@ app.use(express.json());
 app.use(parser.urlencoded({ extended: false })); 
 
 
-app.use("/api/usuarios", userRoutes);
-app.use("/api/recetas", recetaRoutes);
-app.use("/api/calificaciones", calificacionRoutes);
-app.use("/api/favoritos", favoritoRoutes);
-app.use("/api/reportes", reporteRoutes);
+app.use("/api", userRoutes);
+app.use("/api", recetaRoutes);
+app.use("/api", calificacionRoutes);
+app.use("/api", favoritoRoutes);
+app.use("/api", reporteRoutes);
 
 
 mongoose
