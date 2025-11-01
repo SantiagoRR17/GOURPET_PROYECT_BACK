@@ -28,7 +28,26 @@ router.get("/recetas", (req, res) => {
  .then((data) => res.json(data))
  .catch((error) => res.json({ message: error }));
 });
+// Ruta para obtener las recetas con la calificación más alta
+router.get("/reportes/top-recetas", async (req, res) => {
+  try {
+    // Obtener todas las recetas con sus calificaciones asociadas
+    const calificaciones = await calificacionSchema.aggregate([
+      { $group: { _id: "$receta", promedio_calificacion: { $avg: "$puntaje" } } },
+      { $sort: { promedio_calificacion: -1 } }, // Ordenar de mayor a menor calificación
+      { $limit: 5 } // Obtener las 5 mejores recetas
+    ]);
 
+    // Obtener los detalles de las recetas
+    const recetasTop = await recetaSchema.find({
+      '_id': { $in: calificaciones.map(c => c._id) }
+    });
+
+    res.json(recetasTop); // Devolver las recetas con las calificaciones más altas
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+});
 //Consultar un receta por su id
 router.get("/recetas/:id", (req, res) => {
  const { id } = req.params;
@@ -159,28 +178,9 @@ router.patch("/recetas/:id/publicar", async (req, res) => {
   }
 });
 
-/*
-// Ruta para obtener las recetas con la calificación más alta
-router.get("/reportes/top-recetas", async (req, res) => {
-  try {
-    // Obtener todas las recetas con sus calificaciones asociadas
-    const calificaciones = await calificacionSchema.aggregate([
-      { $group: { _id: "$receta", promedio_calificacion: { $avg: "$puntaje" } } },
-      { $sort: { promedio_calificacion: -1 } }, // Ordenar de mayor a menor calificación
-      { $limit: 5 } // Obtener las 5 mejores recetas
-    ]);
 
-    // Obtener los detalles de las recetas
-    const recetasTop = await recetaSchema.find({
-      '_id': { $in: calificaciones.map(c => c._id) }
-    });
 
-    res.json(recetasTop); // Devolver las recetas con las calificaciones más altas
-  } catch (error) {
-    res.status(500).json({ message: error.message });
-  }
-});
-*/
+
 
 
 module.exports = router;

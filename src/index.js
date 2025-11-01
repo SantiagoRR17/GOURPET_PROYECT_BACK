@@ -8,7 +8,6 @@ const userRoutes = require("./routes/usuarios");
 const recetaRoutes = require("./routes/recetas");
 const calificacionRoutes = require("./routes/calificaciones");
 const favoritoRoutes = require("./routes/favoritos");
-const reporteRoutes = require("./routes/reportes");
 require("dotenv").config(); 
 app.use(cors()); 
 app.use(express.json());
@@ -19,7 +18,6 @@ app.use("/api", userRoutes);
 app.use("/api", recetaRoutes);
 app.use("/api", calificacionRoutes);
 app.use("/api", favoritoRoutes);
-app.use("/api", reporteRoutes);
 
 
 mongoose
