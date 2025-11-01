@@ -4,13 +4,13 @@ const recetaSchema = require("../models/receta");
 
 router.post("/receta", async (req, res) => { 
   try { 
-    const { nombre, descripcion, ingredientes, tipo_dieta, especie, categoria, creada_por } = req.body; 
+    const { nombre, descripcion, ingredientes, tipo_dieta, especie, creada_por } = req.body; 
     // Validaciones básicas de los datos requeridos 
     if (!nombre || !descripcion || !ingredientes || !tipo_dieta || !creada_por) { 
       return res.status(400).json({ error: "Faltan datos requeridos" }); 
     } 
     //Crear una nueva receta 
-    const nuevaReceta = new Receta({ 
+    const nuevaReceta = new recetaSchema({ 
       nombre, descripcion, ingredientes, tipo_dieta, especie, creada_por, 
     }); 
     //Guardar la receta en la base de datos 
