@@ -47,11 +47,11 @@ const recetaSchema = new mongoose.Schema({
   }
 });
 
-/* Middleware para actualizar la fecha de modificación automáticamente
+
 recetaSchema.pre("save", function (next) {
   this.fecha_actualizacion = Date.now();
   next();
-});*/
+});
 
 /*Opcional: método para recalcular promedio de calificaciones
 recetaSchema.methods.actualizarCalificacionPromedio = async function () {
