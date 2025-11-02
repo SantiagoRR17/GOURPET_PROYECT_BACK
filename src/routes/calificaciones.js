@@ -13,7 +13,7 @@ router.post("/calificaciones", (req, res) => {
 
 //Consultar todos los calificaciones
 router.get("/calificaciones", (req, res) => {
- calificacionSchema.find({edad:{$in:[17,21]}})
+ calificacionSchema.find()
  .then((data) => res.json(data))
  .catch((error) => res.json({ message: error }));
 });
