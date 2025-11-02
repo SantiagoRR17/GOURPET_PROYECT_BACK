@@ -53,17 +53,5 @@ recetaSchema.pre("save", function (next) {
   next();
 });
 
-/*Opcional: método para recalcular promedio de calificaciones
-recetaSchema.methods.actualizarCalificacionPromedio = async function () {
-  const Calificacion = mongoose.model("Calificacion");
-  const calificaciones = await Calificacion.find({ receta: this._id });
-  if (calificaciones.length > 0) {
-    const promedio = calificaciones.reduce((acc, c) => acc + c.puntaje, 0) / calificaciones.length;
-    this.calificacion_promedio = promedio;
-  } else {
-    this.calificacion_promedio = 0;
-  }
-  await this.save();
-};*/
 
 module.exports = mongoose.model("Receta", recetaSchema);
