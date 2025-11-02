@@ -17,7 +17,7 @@ const favoritoSchema = new mongoose.Schema({
   }
 });
 
-// Evitar duplicar favoritos (un mismo usuario no puede agregar la misma receta dos veces)
-//favoritoSchema.index({ usuario: 1, receta: 1 }, { unique: true });
+
+favoritoSchema.index({ usuario: 1, receta: 1 }, { unique: true });
 
 module.exports = mongoose.model("Favorito", favoritoSchema);
