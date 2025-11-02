@@ -1,7 +1,7 @@
 const express = require("express");
 const router = express.Router(); //manejador de rutas de express
 const recetaSchema = require("../models/receta");
-
+const calificacionSchema = require("../models/calificacion");
 router.post("/receta", async (req, res) => { 
   try { 
     const { nombre, descripcion, ingredientes, tipo_dieta, especie, creada_por } = req.body; 
@@ -48,14 +48,6 @@ router.get("/reportes/top-recetas", async (req, res) => {
     res.status(500).json({ message: error.message });
   }
 });
-//Consultar un receta por su id
-router.get("/recetas/:id", (req, res) => {
- const { id } = req.params;
- recetaSchema
- .findById(id)
- .then((data) => res.json(data))
- .catch((error) => res.json({ message: error }));
-});
 
 //Consultar un receta por atributo
 router.get("/recetas/buscar", (req, res) => {
@@ -70,13 +62,24 @@ router.get("/recetas/buscar", (req, res) => {
  .catch((error) => res.json({ message: error }));
 });
 
-//Modificar categoria receta REVISAR
+//Consultar un receta por su id
+router.get("/recetas/:id", (req, res) => {
+ const { id } = req.params;
+ recetaSchema
+ .findById(id)
+ .then((data) => res.json(data))
+ .catch((error) => res.json({ message: error }));
+});
+
+
+
+//Modificar tipo_dieta receta REVISAR
 router.put("/recetas/:id/modificar", (req, res) => {
  const { id } = req.params;
- const { categoria} = req.body;
+ const { tipo_dieta } = req.body;
  recetaSchema
  .updateOne({ _id: id }, {
- $set: { categoria }
+ $set: { tipo_dieta }
  })
  .then((data) => res.json(data))
  .catch((error) => res.json({ message: error }));
@@ -127,27 +130,6 @@ router.delete("/recetas/:id", async (req, res) => {
     res.status(400).json({ message: error.message || error });
   }
 });
-
-
-router.delete("/recetas/:id", async (req, res) => { 
-
-  try { 
-    const { id } = req.params; 
-    // Buscar la receta por su ID 
-    const receta = await Receta.findById(id); 
-
-      if (!receta) { 
-
-        return res.status(404).json({ error: "Receta no encontrada" }); 
-      } 
-    // Eliminar la receta 
-    await receta.remove(); 
-    res.status(200).json({ message: "Receta eliminada correctamente" }); 
-  } catch (error) { 
-    res.status(500).json({ error: "Hubo un error al eliminar la receta" }); 
-  } 
-}); 
-
 
 
 // Publicar o despublicar receta
